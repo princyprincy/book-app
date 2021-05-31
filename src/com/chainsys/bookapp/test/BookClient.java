@@ -14,10 +14,11 @@ public class BookClient {
 
 	Set<Book> bookSet;
 	List<Integer> idlist;
+	List<String> namelist;
 	BookService service = new BookServiceImpl();
 	System.out.println(" 1. Find All Books");
 	System.out.println(" 2. Find All Books Id");
-
+	System.out.println(" 3. Find All Books Name");
 	System.out.println("Enter the choice");
 	Scanner scanner = new Scanner(System.in);
 	int choice = scanner.nextInt();
@@ -32,7 +33,10 @@ public class BookClient {
 		idlist = service.findAllId();
 		System.out.println(idlist);
 		break;
-
+	case 3:
+		System.out.println("Find All Books Name");
+		namelist=service.findAllName();
+		System.out.println(namelist);
 	default:
 		break;
 	}

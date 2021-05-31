@@ -8,5 +8,5 @@ import com.chainsys.bookapp.model.Book;
 public interface BookDAO {
 	Set<Book> findAll();
 	List<Integer> findAllId();
-
+	List<String> findAllName();
 }

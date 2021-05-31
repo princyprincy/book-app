@@ -9,4 +9,5 @@ public interface BookService {
 
 	Set<Book> findAll();
 	List<Integer> findAllId();
+	List<String> findAllName();
 }

@@ -26,6 +26,10 @@ public class BookServiceImpl implements BookService{
 		return dao.findAllId();
 	}
 
-
+	@Override
+	public List<String> findAllName() {
+		return dao.findAllName();
+	}
+	
 
 }
