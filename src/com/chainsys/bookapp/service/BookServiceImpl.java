@@ -43,6 +43,17 @@ public class BookServiceImpl implements BookService{
 		}
 
 	}
+
+	@Override
+	public Book findByName(String name) throws BookNotFoundException {
+		Book book=dao.findByName(name);
+		if (book == null) {
+			throw new BookNotFoundException("Book Name Not Found");
+		} else {
+			return book;
+		}
+
+	}
 	
 
 }

@@ -95,4 +95,20 @@ public class BookDAOImpl implements BookDAO {
 		return book;
 	}
 
+	@Override
+	public Book findByName(String name) throws BookNotFoundException {
+		Book book = null;
+		try {
+			pstmt = con.prepareStatement("select * from book_2611 where book_title=?");
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				book = new Book(rs.getInt("book_id"), rs.getString("book_title"), rs.getDate("publish_date").toLocalDate());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return book;
+		}
+
 }

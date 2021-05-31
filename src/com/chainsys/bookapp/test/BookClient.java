@@ -21,6 +21,7 @@ public class BookClient {
 	System.out.println(" 2. Find All Books Id");
 	System.out.println(" 3. Find All Books Name");
 	System.out.println(" 4. Find the book by id");
+	System.out.println(" 5. Find the book by name");
 
 	
 	System.out.println("Enter the choice");
@@ -48,6 +49,17 @@ public class BookClient {
 		Integer id=sc.nextInt();
 		try {
 		Book book = service.findById(id);
+		System.out.println(book);
+		}
+		catch(BookNotFoundException e){		
+		}
+		break;
+	case 5:
+		System.out.println("Find the book by name");
+		sc=new Scanner(System.in);
+		String name=sc.next();
+		try {
+		Book book = service.findByName(name);
 		System.out.println(book);
 		}
 		catch(BookNotFoundException e){		

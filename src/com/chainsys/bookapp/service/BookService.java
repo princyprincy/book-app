@@ -12,4 +12,6 @@ public interface BookService {
 	List<Integer> findAllId();
 	List<String> findAllName();
 	Book findById(int id) throws BookNotFoundException;
+	Book findByName(String name) throws BookNotFoundException;
+
 }
