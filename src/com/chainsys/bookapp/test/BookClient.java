@@ -1,5 +1,7 @@
 package com.chainsys.bookapp.test;
 
+import java.time.LocalDate;
+
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
@@ -16,12 +18,15 @@ public class BookClient {
 	Set<Book> bookSet;
 	List<Integer> idlist;
 	List<String> namelist;
+	String date;
+	DateTimeFormatter dateFormat;
 	BookService service = new BookServiceImpl();
 	System.out.println(" 1. Find All Books");
 	System.out.println(" 2. Find All Books Id");
 	System.out.println(" 3. Find All Books Name");
 	System.out.println(" 4. Find the book by id");
 	System.out.println(" 5. Find the book by name");
+	System.out.println(" 6. Find the book by publish date");
 
 	
 	System.out.println("Enter the choice");
@@ -61,6 +66,17 @@ public class BookClient {
 		try {
 		Book book = service.findByName(name);
 		System.out.println(book);
+		}
+		catch(BookNotFoundException e){		
+		}
+		break;
+	case 6:
+		System.out.println("Find the book by publish date");
+		try {
+			date="05/23/2012";
+			dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+			Book book=service.findByDate(LocalDate.parse(date,dateFormat));
+			System.out.println(book);
 		}
 		catch(BookNotFoundException e){		
 		}

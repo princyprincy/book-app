@@ -1,10 +1,12 @@
 package com.chainsys.bookapp.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -110,5 +112,22 @@ public class BookDAOImpl implements BookDAO {
 		}
 		return book;
 		}
+
+	@Override
+	public Book findByDate(LocalDate date) throws BookNotFoundException {
+		Book book = null;
+		try {
+			pstmt = con.prepareStatement("select * from book_2611 where publish_date=?");
+			pstmt.setDate(1, Date.valueOf(date));
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				book = new Book(rs.getInt("book_id"), rs.getString("book_title"), rs.getDate("publish_date").toLocalDate());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return book;
+
+	}
 
 }

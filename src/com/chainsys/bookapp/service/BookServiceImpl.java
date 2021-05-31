@@ -1,5 +1,6 @@
 package com.chainsys.bookapp.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import java.util.Set;
@@ -53,6 +54,16 @@ public class BookServiceImpl implements BookService{
 			return book;
 		}
 
+	}
+
+	@Override
+	public Book findByDate(LocalDate date) throws BookNotFoundException {
+		Book book=dao.findByDate(date);
+		if (book == null) {
+			throw new BookNotFoundException("Publish date Not Found");
+		} else {
+			return book;
+		}
 	}
 	
 
