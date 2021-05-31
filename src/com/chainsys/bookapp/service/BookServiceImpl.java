@@ -1,10 +1,12 @@
 package com.chainsys.bookapp.service;
 
 import java.util.List;
+
 import java.util.Set;
 
 import com.chainsys.bookapp.dao.BookDAO;
 import com.chainsys.bookapp.dao.BookDAOImpl;
+import com.chainsys.bookapp.exception.BookNotFoundException;
 import com.chainsys.bookapp.model.Book;
 
 
@@ -29,6 +31,17 @@ public class BookServiceImpl implements BookService{
 	@Override
 	public List<String> findAllName() {
 		return dao.findAllName();
+	}
+
+	@Override
+	public Book findById(int id) throws BookNotFoundException{
+		Book book=dao.findById(id);
+		if (book == null) {
+			throw new BookNotFoundException("Book Id Not Found");
+		} else {
+			return book;
+		}
+
 	}
 	
 

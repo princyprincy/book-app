@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.chainsys.bookapp.exception.BookNotFoundException;
 import com.chainsys.bookapp.model.Book;
 import com.chainsys.bookapp.service.BookService;
 import com.chainsys.bookapp.service.BookServiceImpl;
@@ -19,6 +20,9 @@ public class BookClient {
 	System.out.println(" 1. Find All Books");
 	System.out.println(" 2. Find All Books Id");
 	System.out.println(" 3. Find All Books Name");
+	System.out.println(" 4. Find the book by id");
+
+	
 	System.out.println("Enter the choice");
 	Scanner scanner = new Scanner(System.in);
 	int choice = scanner.nextInt();
@@ -37,6 +41,19 @@ public class BookClient {
 		System.out.println("Find All Books Name");
 		namelist=service.findAllName();
 		System.out.println(namelist);
+		break;
+	case 4:
+		System.out.println("Find the book by id");
+		Scanner sc=new Scanner(System.in);
+		Integer id=sc.nextInt();
+		try {
+		Book book = service.findById(id);
+		System.out.println(book);
+		}
+		catch(BookNotFoundException e){		
+		}
+		break;
+
 	default:
 		break;
 	}

@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.chainsys.bookapp.exception.BookNotFoundException;
 import com.chainsys.bookapp.model.Book;
 
 public class BookDAOImpl implements BookDAO {
@@ -76,6 +77,22 @@ public class BookDAOImpl implements BookDAO {
 		}
 
 		return namelist;
+	}
+
+	@Override
+	public Book findById(int id) throws BookNotFoundException {
+		Book book = null;
+		try {
+			pstmt = con.prepareStatement("select * from book_2611 where book_id=?");
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				book = new Book(rs.getInt("book_id"), rs.getString("book_title"), rs.getDate("publish_date").toLocalDate());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return book;
 	}
 
 }
