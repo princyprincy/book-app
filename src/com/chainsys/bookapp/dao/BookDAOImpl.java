@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.chainsys.bookapp.model.Book;
@@ -15,11 +17,12 @@ public class BookDAOImpl implements BookDAO {
 	private static PreparedStatement pstmt;
 	private static ResultSet rs;
 	private static Set<Book> bookSet;
+	private static ArrayList<Integer> idlist;
 
 	public BookDAOImpl() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.20:1521:EBS1228", "apps", "apps");
+			con = DriverManager.getConnection("jdbc:oracle:thin:@fserver.chainsys.com:1521:DBEBS12", "apps", "apps");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
@@ -40,6 +43,22 @@ public class BookDAOImpl implements BookDAO {
 			e.printStackTrace();
 		}
 		return bookSet;
+	}
+
+	@Override
+	public List<Integer> findAllId() {
+		try {
+			pstmt = con.prepareStatement("select book_id from book_2611");
+			rs = pstmt.executeQuery();
+			idlist = new ArrayList<>();
+			while (rs.next()) {
+				idlist.add(rs.getInt("book_id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return idlist;
+		
 	}
 
 }

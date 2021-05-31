@@ -13,17 +13,26 @@ public class BookClient {
 	public static void main(String[] args) {
 
 	Set<Book> bookSet;
+	List<Integer> idlist;
 	BookService service = new BookServiceImpl();
-	System.out.println(" 1. Find All Products");
+	System.out.println(" 1. Find All Books");
+	System.out.println(" 2. Find All Books Id");
+
 	System.out.println("Enter the choice");
 	Scanner scanner = new Scanner(System.in);
 	int choice = scanner.nextInt();
 	switch (choice) {
 	case 1:
-		System.out.println("Find All Products");
+		System.out.println("Find All Books");
 		bookSet = service.findAll();
 		System.out.println(bookSet);
 		break;
+	case 2:
+		System.out.println("Find All Books Id");
+		idlist = service.findAllId();
+		System.out.println(idlist);
+		break;
+
 	default:
 		break;
 	}
