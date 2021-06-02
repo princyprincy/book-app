@@ -1,5 +1,7 @@
 package com.chainsys.bookapp.service;
 
+import java.sql.Date;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -64,6 +66,12 @@ public class BookServiceImpl implements BookService{
 		} else {
 			return book;
 		}
+	}
+
+	@Override
+	public List<Date> findAllDate() {
+		return dao.findAllDate();
+
 	}
 	
 

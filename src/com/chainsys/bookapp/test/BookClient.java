@@ -1,5 +1,7 @@
 package com.chainsys.bookapp.test;
 
+import java.sql.Date;
+
 import java.time.LocalDate;
 
 import java.time.format.DateTimeFormatter;
@@ -18,6 +20,8 @@ public class BookClient {
 	Set<Book> bookSet;
 	List<Integer> idlist;
 	List<String> namelist;
+	List<Date> datelist;
+
 	String date;
 	DateTimeFormatter dateFormat;
 	BookService service = new BookServiceImpl();
@@ -80,6 +84,11 @@ public class BookClient {
 		}
 		catch(BookNotFoundException e){		
 		}
+		break;
+	case 7:
+		System.out.println("Find All Books publish dates");
+		datelist = service.findAllDate();
+		System.out.println(datelist);
 		break;
 
 	default:

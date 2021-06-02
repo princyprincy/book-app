@@ -1,6 +1,7 @@
 package com.chainsys.bookapp.dao;
 
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -22,6 +23,7 @@ public class BookDAOImpl implements BookDAO {
 	private static Set<Book> bookSet;
 	private static ArrayList<Integer> idlist;
 	private static ArrayList<String> namelist;
+	private static ArrayList<Date> datelist;
 
 	public BookDAOImpl() {
 		try {
@@ -128,6 +130,21 @@ public class BookDAOImpl implements BookDAO {
 		}
 		return book;
 
+	}
+
+	@Override
+	public List<Date> findAllDate() {
+		try {
+			pstmt = con.prepareStatement("select publish_date from book_2611");
+			rs = pstmt.executeQuery();
+			datelist = new ArrayList<>();
+			while (rs.next()) {
+				datelist.add(rs.getDate("publish_date"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return datelist;
 	}
 
 }
